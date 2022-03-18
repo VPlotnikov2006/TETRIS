@@ -5,18 +5,14 @@
 //{
 class Score {
 private:
-    int score;
+    int score;               ///Текущий счёт
 public:
-    Score(int s): score(s) {}
-    Score(): score(0) {}
-    void update(int n);
-    void draw(Point p1);
-    int get();
+    Score(int s): score(s) {}///Нормальный конструктор
+    Score(): score(0) {}     ///Нулевой конструктор
+    void update(int n);      ///Конвертация разрушенных рядов в очков
+    void draw(Point p1);     ///Рисование счёта
+    int get();               ///Возвращает текущий счёт
 };
-
-int Score::get() {
-    return score;
-}
 
 void Score::update(int n) {
     if( n == 1 )
@@ -36,6 +32,10 @@ void Score::draw(Point p) {
     sprintf(chet,"%d",score);
     txTextOut(p.x, p.y, "Score");
     txTextOut(p.x, p.y + 10 + txGetTextExtentY(chet), chet);
+}
+
+int Score::get(){
+    return score;
 }
 //}
 //Этот код написал Венгеров Кирилл, электронной подписью является число - 1948
