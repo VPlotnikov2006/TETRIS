@@ -5,14 +5,18 @@
 //{
 class Score {
 private:
-    int score;               ///Текущий счёт
+    int score;               ///РўРµРєСѓС‰РёР№ СЃС‡С‘С‚
 public:
-    Score(int s): score(s) {}///Нормальный конструктор
-    Score(): score(0) {}     ///Нулевой конструктор
-    void update(int n);      ///Конвертация разрушенных рядов в очков
-    void draw(Point p1);     ///Рисование счёта
-    int get();               ///Возвращает текущий счёт
+    Score(int s): score(s) {}///РќРѕСЂРјР°Р»СЊРЅС‹Р№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+    Score(): score(0) {}     ///РќСѓР»РµРІРѕР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+    void update(int n);      ///РљРѕРЅРІРµСЂС‚Р°С†РёСЏ СЂР°Р·СЂСѓС€РµРЅРЅС‹С… СЂСЏРґРѕРІ РІ РѕС‡РєРѕРІ
+    void draw(Point p1);     ///Р РёСЃРѕРІР°РЅРёРµ СЃС‡С‘С‚Р°
+    int get();               ///Р’РѕР·РІСЂР°С‰Р°РµС‚ С‚РµРєСѓС‰РёР№ СЃС‡С‘С‚
 };
+
+int Score::get() {
+    return score;
+}
 
 void Score::update(int n) {
     if( n == 1 )
@@ -27,19 +31,15 @@ void Score::update(int n) {
 
 void Score::draw(Point p) {
     txSelectFont ("Serifiqo 4F Free Capitals", 100);
-    txSetColor(TX_WHITE);
+    txSetColor(TX_BLACK);
     char chet[10];
     sprintf(chet,"%d",score);
     txTextOut(p.x, p.y, "Score");
     txTextOut(p.x, p.y + 10 + txGetTextExtentY(chet), chet);
 }
-
-int Score::get(){
-    return score;
-}
 //}
-//Этот код написал Венгеров Кирилл, электронной подписью является число - 1948
-//Открытый ключ: {61534471, 11}
-//Зашифрованная подпись - 41637548
+//Р­С‚РѕС‚ РєРѕРґ РЅР°РїРёСЃР°Р» Р’РµРЅРіРµСЂРѕРІ РљРёСЂРёР»Р», СЌР»РµРєС‚СЂРѕРЅРЅРѕР№ РїРѕРґРїРёСЃСЊСЋ СЏРІР»СЏРµС‚СЃСЏ С‡РёСЃР»Рѕ - 1948
+//РћС‚РєСЂС‹С‚С‹Р№ РєР»СЋС‡: {61534471, 11}
+//Р—Р°С€РёС„СЂРѕРІР°РЅРЅР°СЏ РїРѕРґРїРёСЃСЊ - 41637548
 
 #endif

@@ -11,35 +11,42 @@
 //{
 class Figure {
 private:
-    double x, y;              ///Координаты центра вращения фигуры
-    Figure_type type;         ///Тип фигуры
-    COLORREF color;           ///Цвет фигуры
-    int direction;            ///Направление фигуры
-    Figure_state state = MOVE;///Статус фигуры
+    double x, y;              ///РљРѕРѕСЂРґРёРЅР°С‚С‹ С†РµРЅС‚СЂР° РІСЂР°С‰РµРЅРёСЏ С„РёРіСѓСЂС‹
+    Figure_type type;         ///РўРёРї С„РёРіСѓСЂС‹
+    COLORREF color;           ///Р¦РІРµС‚ С„РёРіСѓСЂС‹
+    int direction;            ///РќР°РїСЂР°РІР»РµРЅРёРµ С„РёРіСѓСЂС‹
+    Figure_state state = MOVE;///РЎС‚Р°С‚СѓСЃ С„РёРіСѓСЂС‹
 public:
-    Figure(): x(0), y(0), type(SQUARE), color(TX_NULL), direction(0) {} ///Нулевой конструктор
-    Figure(double x0, double y0, Figure_type t, COLORREF c, int d): x(x0), y(y0), type(t), color(c), direction(d) {} ///Полноценный конструктор
-    Figure& operator= (const Figure &f); ///Оператор присваивания
+    Figure(): x(0), y(0), type(SQUARE), color(TX_NULL), direction(0) {} ///РќСѓР»РµРІРѕР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+    Figure(double x0, double y0, Figure_type t, COLORREF c, int d): x(x0), y(y0), type(t), color(c), direction(d) {} ///РџРѕР»РЅРѕС†РµРЅРЅС‹Р№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+    Figure& operator= (const Figure &f); ///РћРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
 
-    void r_left();  ///Функция поворота ввлево
-    void r_right(); ///Функция поворота вправо
-    void m_left();  ///Функция движения влево
-    void m_right(); ///Функция движения вправо
-    int m_down();   ///Функция движения вниз,
-                    ///Возвращает кол-во стертых рядов,
-                    ///При остановке меняет свой статус и если нет выхода за пределы массива останавливается
+    void r_left();  ///Р¤СѓРЅРєС†РёСЏ РїРѕРІРѕСЂРѕС‚Р° РІРІР»РµРІРѕ
+    void r_right(); ///Р¤СѓРЅРєС†РёСЏ РїРѕРІРѕСЂРѕС‚Р° РІРїСЂР°РІРѕ
+    void m_left();  ///Р¤СѓРЅРєС†РёСЏ РґРІРёР¶РµРЅРёСЏ РІР»РµРІРѕ
+    void m_right(); ///Р¤СѓРЅРєС†РёСЏ РґРІРёР¶РµРЅРёСЏ РІРїСЂР°РІРѕ
+    int m_down();   ///Р¤СѓРЅРєС†РёСЏ РґРІРёР¶РµРЅРёСЏ РІРЅРёР·,
+                    ///Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»-РІРѕ СЃС‚РµСЂС‚С‹С… СЂСЏРґРѕРІ,
+                    ///РџСЂРё РѕСЃС‚Р°РЅРѕРІРєРµ РјРµРЅСЏРµС‚ СЃРІРѕР№ СЃС‚Р°С‚СѓСЃ Рё РµСЃР»Рё РЅРµС‚ РІС‹С…РѕРґР° Р·Р° РїСЂРµРґРµР»С‹ РјР°СЃСЃРёРІР° РѕСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ
 
-    void set(Point p); ///Установка координат
+    void set(Point p); ///РЈСЃС‚Р°РЅРѕРІРєР° РєРѕРѕСЂРґРёРЅР°С‚
+    void set(int d);
+    void set(Figure_state s);
 
-    void draw(double s); ///Рисование
+    void draw(double s); ///Р РёСЃРѕРІР°РЅРёРµ
 
-    int push(); ///Фигура вписывает себя в двумерный массив и возвращает кол-во стертых рядов
+    int push(); ///Р¤РёРіСѓСЂР° РІРїРёСЃС‹РІР°РµС‚ СЃРµР±СЏ РІ РґРІСѓРјРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»-РІРѕ СЃС‚РµСЂС‚С‹С… СЂСЏРґРѕРІ
 
-    bool check(); ///Проверка корректности постановки фигуры
-    Figure_state get(); ///Возвращает статус фигуры
+    bool check(); ///РџСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РїРѕСЃС‚Р°РЅРѕРІРєРё С„РёРіСѓСЂС‹
+    Figure_state get(); ///Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃС‚Р°С‚СѓСЃ С„РёРіСѓСЂС‹
 
-    Point get_pos(); ///Возвращает координаты фигуры
-    void set_default(); ///Фигура появляется в точке спавна
+    Point get_pos(); ///Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚С‹ С„РёРіСѓСЂС‹
+    void set_default(); ///Р¤РёРіСѓСЂР° РїРѕСЏРІР»СЏРµС‚СЃСЏ РІ С‚РѕС‡РєРµ СЃРїР°РІРЅР°
+    Figure_type get_type();
+    Figure gen_shadow();
+    int get_d() {
+        return direction;
+    }
 };
 //}
 //==============================================================================================================================================================
@@ -59,6 +66,8 @@ Figure& Figure::operator= (const Figure &f) {
 }
 
 void Figure::r_left() {
+    if (state == STATIC || state == OUT_OF_AREA)
+        return;
     int new_direction = (direction + 3) % 4;
     Figure cpy(x, y, type, color, new_direction);
     if (cpy.check())
@@ -66,6 +75,8 @@ void Figure::r_left() {
 }
 
 void Figure::r_right() {
+    if (state == STATIC || state == OUT_OF_AREA)
+        return;
     int new_direction = (direction + 5) % 4;
     Figure cpy(x, y, type, color, new_direction);
     if (cpy.check())
@@ -73,34 +84,50 @@ void Figure::r_right() {
 }
 
 void Figure::m_left() {
+    if (state == STATIC || state == OUT_OF_AREA)
+        return;
     Figure cpy(x - BLOCK_SIZE, y, type, color, direction);
     if(cpy.check())
         x = x - BLOCK_SIZE;
 }
 
 void Figure::m_right() {
+    if (state == STATIC || state == OUT_OF_AREA)
+        return;
     Figure cpy(x + BLOCK_SIZE, y, type, color, direction);
     if(cpy.check())
         x = x + BLOCK_SIZE;
 }
 
 int Figure::m_down() {
-    if (state == MOVE) {
-        Figure cpy(x, y + BLOCK_SIZE, type, color, direction);
-        if(cpy.check()) {
-            y = y + BLOCK_SIZE;
-        }
-        else {
-            return push();
-        }
+    if (state == STATIC || state == OUT_OF_AREA)
+        return 0;
+    Figure cpy(x, y + BLOCK_SIZE, type, color, direction);
+    if(cpy.check()) {
+        y = y + BLOCK_SIZE;
+    }
+    else {
+        return push();
     }
     return 0;
 }
 
+Figure Figure::gen_shadow() {
+    Figure shadow(x, y, type, RGB(50, 50, 50), direction);
+    shadow.set(SHADOW);
+    while(shadow.get() != STATIC)
+        shadow.m_down();
+    shadow.set(SHADOW);
+    return shadow;
+}
 
 void Figure::set(Point p) {
     x = p.x;
     y = p.y;
+}
+
+void Figure::set(Figure_state s) {
+    state = s;
 }
 
 void Figure::draw(double s = 1) {
@@ -110,6 +137,11 @@ void Figure::draw(double s = 1) {
 }
 
 int Figure::push() {
+    if (state == SHADOW || state == STATIC) {
+        state = STATIC;
+        return 0;
+    }
+    bool flag = 1;
     vector<vector<pair<bool, COLORREF>>> cpy = static_arr;
     for (auto k : dict[type][direction]) {
         double X = x + k.x * BLOCK_SIZE;
@@ -118,6 +150,9 @@ int Figure::push() {
         Y -= Y_UP;
         int j = (int) (X) / BLOCK_SIZE;
         int i = (int) (Y) / BLOCK_SIZE;
+        if (i == 0) {
+            flag = 0;
+        }
         if (i < 0) {
             state = OUT_OF_AREA;
             static_arr = cpy;
@@ -126,7 +161,10 @@ int Figure::push() {
         static_arr[i][j].first = 1;
         static_arr[i][j].second = color;
     }
-    state = STATIC;
+    if (flag)
+        state = STATIC;
+    else
+        state = OUT_OF_AREA;
     return update();
 }
 
@@ -157,11 +195,19 @@ void Figure::set_default() {
     x = start_pos[type].x * BLOCK_SIZE + X_LEFT;
     y = start_pos[type].y * BLOCK_SIZE + Y_UP;
 }
+
+Figure_type Figure::get_type() {
+    return type;
+}
+
+void Figure::set(int d){
+    direction = d;
+}
 //}
 //==============================================================================================================================================================
 //}
-//Этот код написал Плотников Владимир, электронной подписью является число - 589201
-//Открытый ключ: {1001117521, 7}
-//Зашифрованная подпись - 525272584
+//Р­С‚РѕС‚ РєРѕРґ РЅР°РїРёСЃР°Р» РџР»РѕС‚РЅРёРєРѕРІ Р’Р»Р°РґРёРјРёСЂ, СЌР»РµРєС‚СЂРѕРЅРЅРѕР№ РїРѕРґРїРёСЃСЊСЋ СЏРІР»СЏРµС‚СЃСЏ С‡РёСЃР»Рѕ - 589201
+//РћС‚РєСЂС‹С‚С‹Р№ РєР»СЋС‡: {1001117521, 7}
+//Р—Р°С€РёС„СЂРѕРІР°РЅРЅР°СЏ РїРѕРґРїРёСЃСЊ - 525272584
 
 #endif
