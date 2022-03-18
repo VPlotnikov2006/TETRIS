@@ -2,18 +2,10 @@
 
 #ifndef _TUTORIAL_
 #define _TUTORIAL_
-#include "base.h"
-#include "line_clear.h"
-#include "figure_class.h"
-#include "random.h"
-#include "score.h"
-#include "button.h"
-#include "key.h"
-#include "record.h"
 
 //{
-void draw_direct();
-void open_tutorial();
+void draw_direct();  ///Рисует настройки
+void open_tutorial();///Открывает <<Вкладку>> туториала
 
 void draw_direct(){
     int x = 180 - BLOCK_SIZE;
@@ -94,7 +86,6 @@ void open_tutorial(){
     tut4.draw();
     tut5.draw();
     tut6.draw();
-    //settings_print();
     Default.draw();
     Exit.draw();
     draw(h, 180, 64, 252, 136);
