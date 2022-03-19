@@ -10,7 +10,7 @@ Figure rand_figure(Figure_type t);///Случайная фигура
 //////////////////////////////////////
 
 COLORREF rand_color() {
-    srand (time (NULL));
+
     int num = rand() % useful_colors.size();
     return useful_colors[num];
 }

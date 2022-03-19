@@ -23,15 +23,12 @@ __attribute__((__noreturn__)) void tetris_exit();///Выход из игры (с
 __attribute__((__noreturn__)) void menu();       ///Открытие основного меню
 
 int main() {
-    //SetConsoleCP(1251);
-    //SetConsoleOutputCP(1251);
     build();
     key_build();
     settings_load();
     records_load();
     txCreateWindow(1080, 720);
     menu();
-
 }
 
 __attribute__((__noreturn__)) void menu() {
@@ -78,18 +75,19 @@ __attribute__((__noreturn__)) void tetris_exit() {
 }
 
 void play() {
+    srand (time (NULL));
     build();
     Figure main_figure;
     Figure next;
     Figure shadow;
-    Figure hold = rand_figure(NOT_FIGURE);
-    hold.set({900, 396});
+    Figure hold = rand_figure();
+    hold.set({900, 596});
     Figure t;
     Score score;
-    main_figure = rand_figure(LINE);
+    main_figure = rand_figure();
     shadow = main_figure.gen_shadow();
     next = rand_figure();
-    next.set({900, 180});
+    next.set({900, 180 + 50});
     while (!GetAsyncKeyState(VK_ESCAPE)) {
         while(true) {
             for(int i = 0; i < 3 && !GetAsyncKeyState(VK_ESCAPE); i++) {
@@ -118,31 +116,21 @@ void play() {
                     Point m_pos = main_figure.get_pos();
                     h_pos += shift[hold.get_type()];
                     m_pos += shift[main_figure.get_type()];
-                    if (hold.get_type() == NOT_FIGURE) {
-                        hold = main_figure;
-                        hold.set(h_pos - shift[hold.get_type()]);
-                        main_figure = next;
-                        main_figure.set_default();
-                        next = rand_figure();
-                        next.set({900, 180});
-                    }
-                    else {
-                        int d = main_figure.get_d();
+                    int d = main_figure.get_d();
+                    t = hold;
+                    hold = main_figure;
+                    main_figure = t;
+                    hold.set(h_pos - shift[hold.get_type()]);
+                    main_figure.set(m_pos - shift[main_figure.get_type()]);
+                    hold.set(0);
+                    if (!main_figure.check()) {
                         t = hold;
                         hold = main_figure;
                         main_figure = t;
                         hold.set(h_pos - shift[hold.get_type()]);
                         main_figure.set(m_pos - shift[main_figure.get_type()]);
                         hold.set(0);
-                        if (!main_figure.check()) {
-                            t = hold;
-                            hold = main_figure;
-                            main_figure = t;
-                            hold.set(h_pos - shift[hold.get_type()]);
-                            main_figure.set(m_pos - shift[main_figure.get_type()]);
-                            hold.set(0);
-                            main_figure.set(d);
-                        }
+                        main_figure.set(d);
                     }
                     shadow = main_figure.gen_shadow();
                 }
@@ -155,8 +143,16 @@ void play() {
                 }
                 static_draw();
                 txSetColor(TX_BLACK, 2);
-                txRectangle(810, 90, 990, 270);
-                txRectangle(810, 306, 990, 486);
+                txSelectFont ("Serifiqo 4F Free Capitals", 35, 10, 1000);
+                txTextOut (20, 250, "Press <<ESCAPE>> to exit to menu");
+                txTextOut (20, 300, "After the game ends, ");
+                txTextOut (20, 350, "A dialog box will open");
+                txTextOut (20, 400, "Look for him");
+                txSelectFont ("Serifiqo 4F Free Capitals", 100);
+                txTextOut(810 + 25, 80 - 40, "NEXT");
+                txTextOut(810 + 25, 306 + 200 - 100, "HOLD");
+                txRectangle(810, 90 + 50, 990, 270 + 50);
+                txRectangle(810, 306 + 200, 990, 486 + 200);
                 next.draw();
                 hold.draw();
                 score.draw({100, 10});
@@ -175,8 +171,16 @@ void play() {
             static_draw();
             txSetColor(TX_BLACK, 2);
             txSetFillColor(RGB(150, 150, 150));
-            txRectangle(810, 90, 990, 270);
-            txRectangle(810, 306, 990, 486);
+            txSelectFont ("Serifiqo 4F Free Capitals", 35, 10, 1000);
+            txTextOut (20, 250, "Press <<ESCAPE>> to exit to menu");
+            txTextOut (20, 300, "After the game ends, ");
+            txTextOut (20, 350, "A dialog box will open");
+            txTextOut (20, 400, "Look for him");
+            txSelectFont ("Serifiqo 4F Free Capitals", 100);
+            txTextOut(810 + 25, 80 - 40, "NEXT");
+            txTextOut(810 + 25, 306 + 200 - 100, "HOLD");
+            txRectangle(810, 90 + 50, 990, 270 + 50);
+            txRectangle(810, 306 + 200, 990, 486 + 200);
             next.draw();
             hold.draw();
             score.draw({100, 10});
@@ -188,7 +192,7 @@ void play() {
             main_figure = next;
             main_figure.set_default();
             next = rand_figure();
-            next.set({900, 180});
+            next.set({900, 180 + 50});
             shadow = main_figure.gen_shadow();
         }
         else {
