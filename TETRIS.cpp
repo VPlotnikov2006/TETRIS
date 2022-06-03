@@ -199,7 +199,7 @@ void play() {
             break;
         }
     }
-    if (MessageBox(NULL, "Would you like to record your score?","Record?", MB_YESNO) == IDYES) {
+    if (MessageBox(txWindow(), "Would you like to record your score?","Record?", MB_YESNO) == IDYES) {
         const char* nik = txInputBox("Under what name do you want to do it?", "Record!", "PRO_GAME_MASTER_2010");
         Record r(string(nik), score.get());
         record_add(r);
